@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback } from 'react'
 import Clue from './components/Clue'
-import Keypad from './components/Keypad'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
@@ -9,21 +8,21 @@ function App() {
   const [started, setStarted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30)
   const [currentClueIndex, setCurrentClueIndex] = useState(0)
-  const [collectedDigits, setCollectedDigits] = useState([])
-  const [showKeypad, setShowKeypad] = useState(false)
-  const [userPin, setUserPin] = useState('')
+  const [collectedAnswers, setCollectedAnswers] = useState([])
+  const [userAnswer, setUserAnswer] = useState('')
   const [result, setResult] = useState(null)
   const [clues, setClues] = useState([])
   const [setNumber, setSetNumber] = useState(0)
+  const [attemptsLeft, setAttemptsLeft] = useState(3)
 
   const resetGameState = () => {
     setStarted(false)
-    setTimeLeft(300)
+    setTimeLeft(30)
     setCurrentClueIndex(0)
-    setCollectedDigits([])
-    setShowKeypad(false)
-    setUserPin('')
+    setCollectedAnswers([])
+    setUserAnswer('')
     setResult(null)
+    setAttemptsLeft(3)
   }
 
   const loadNewSet = useCallback(() => {
@@ -63,24 +62,25 @@ function App() {
   const timeDisplay = `${minutes}:${String(seconds).padStart(2, '0')}`
 
   // Handle clue solved
-  const handleClueSolved = (digit) => {
-    const newDigits = [...collectedDigits, digit]
-    setCollectedDigits(newDigits)
+  const handleClueSolved = (answer) => {
+    const newAnswers = [...collectedAnswers, answer]
+    setCollectedAnswers(newAnswers)
 
-    if (newDigits.length < clues.length) {
+    if (newAnswers.length < clues.length) {
       setCurrentClueIndex(currentClueIndex + 1)
     } else {
-      setShowKeypad(true)
+      // All questions answered correctly - SUCCESS!
+      setResult('success')
     }
   }
 
-  // Handle PIN submission
-  const handlePinSubmit = (pin) => {
-    const correctPin = collectedDigits.join('')
+  // Handle wrong answer
+  const handleWrongAnswer = () => {
+    const newAttempts = attemptsLeft - 1
+    setAttemptsLeft(newAttempts)
     
-    if (pin === correctPin) {
-      setResult('success')
-    } else {
+    if (newAttempts <= 0) {
+      // Out of attempts - FAILURE!
       setResult('failure')
     }
   }
@@ -117,62 +117,11 @@ function App() {
           <main className="game-content">
             <Result 
               result={result} 
-              correctPin={collectedDigits.join('')}
-              userPin={userPin}
+              correctAnswer={collectedAnswers.join('')}
+              userAnswer={userAnswer}
               onReset={resetGame}
+              attemptsUsed={3 - attemptsLeft}
             />
-          </main>
-        </div>
-      )
-    }
-
-    // Show keypad for PIN entry
-    if (showKeypad) {
-      return (
-        <div className="game-screen">
-          <header className="navbar">
-            <div className="logo">
-              <span className="logo-symbol">◇</span>
-              <span>CYBER VAULT</span>
-            </div>
-            <div className="game-timer">
-              TIME LEFT&nbsp;&nbsp;
-              <strong>{timeDisplay}</strong>
-            </div>
-          </header>
-
-          <main className="game-content">
-            <div className="game-header">
-              <div>
-                <p className="challenge-label">
-                  ALL FRAGMENTS RECOVERED
-                </p>
-                <h2>ENTER MASTER KEY</h2>
-              </div>
-              <div className="attempts">
-                TIME REMAINING&nbsp;&nbsp;
-                <strong>{timeDisplay}</strong>
-              </div>
-            </div>
-
-            <div className="game-card">
-              <div className="lock-number">
-                MASTER KEY ENTRY
-              </div>
-              <h3>4-DIGIT PIN</h3>
-              <p>
-                You have collected all fragments.
-                <br />
-                Enter the 4-digit master key to unlock the vault.
-              </p>
-
-              <Keypad 
-                onSubmit={(pin) => {
-                  setUserPin(pin)
-                  handlePinSubmit(pin)
-                }}
-              />
-            </div>
           </main>
         </div>
       )
@@ -203,8 +152,8 @@ function App() {
             </div>
 
             <div className="attempts">
-              FRAGMENTS COLLECTED&nbsp;&nbsp;
-              <strong>{collectedDigits.length} / {clues.length}</strong>
+              ATTEMPTS LEFT&nbsp;&nbsp;
+              <strong>{attemptsLeft} / 3</strong>
             </div>
           </div>
 
@@ -214,8 +163,11 @@ function App() {
             </div>
 
             <Clue
+              key={clues[currentClueIndex].id}
               clue={clues[currentClueIndex]}
               onSolved={handleClueSolved}
+              onWrongAnswer={handleWrongAnswer}
+              attemptsLeft={attemptsLeft}
             />
           </div>
         </main>
@@ -254,7 +206,7 @@ function App() {
           </h1>
 
           <p className="description">
-            Four challenges. One master key.
+            Three challenges. Three attempts.
             <br />
             Solve the challenges and unlock the vault.
           </p>
@@ -262,12 +214,12 @@ function App() {
           <div className="game-info">
             <div className="info-box">
               <span>CHALLENGES</span>
-              <strong>04</strong>
+              <strong>03</strong>
             </div>
 
             <div className="info-box">
-              <span>MASTER KEY</span>
-              <strong>4 DIGIT</strong>
+              <span>ATTEMPTS</span>
+              <strong>03</strong>
             </div>
 
             <div className="info-box">
@@ -280,17 +232,13 @@ function App() {
             className="start-button"
             onClick={() => {
               setStarted(true)
-              setTimeLeft(300)
+              setTimeLeft(30)
             }}
           >
             <span className="play-icon">▶</span>
             <span className="button-text">BEGIN CRACKING</span>
           </button>
           
-
-          <p className="warning">
-            Timer starts when the mission begins.
-          </p>
         </section>
 
         <section className="vault-section">

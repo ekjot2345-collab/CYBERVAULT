@@ -1,6 +1,6 @@
 import './Result.css'
 
-export default function Result({ result, correctPin, userPin, onReset }) {
+export default function Result({ result, correctAnswer, userAnswer, onReset, attemptsUsed }) {
   const isSuccess = result === 'success'
 
   return (
@@ -11,28 +11,23 @@ export default function Result({ result, correctPin, userPin, onReset }) {
         </div>
 
         <h1 className="result-title">
-          {isSuccess ? 'VAULT UNLOCKED' : 'MISSION FAILED'}
+          {isSuccess ? 'VAULT UNLOCKED' : 'BETTER LUCK NEXT TIME'}
         </h1>
 
         <p className="result-status">
           {isSuccess
             ? 'Congratulations! You cracked the vault and escaped!'
-            : 'You were unable to crack the vault in time. The security system locked down.'}
+            : 'You have used all 3 attempts. The vault remains locked.'}
         </p>
 
-        <div className="result-details">
-          <div className="detail-box">
-            <span>CORRECT PIN</span>
-            <strong>{correctPin}</strong>
-          </div>
-
-          {!isSuccess && (
+        {!isSuccess && (
+          <div className="result-details">
             <div className="detail-box">
-              <span>YOUR ENTRY</span>
-              <strong>{userPin || 'None'}</strong>
+              <span>ATTEMPTS USED</span>
+              <strong>3 / 3</strong>
             </div>
-          )}
-        </div>
+          </div>
+        )}
 
         <button className="start-button" onClick={onReset}>
           TRY ANOTHER VAULT

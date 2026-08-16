@@ -2,31 +2,19 @@ import { useState } from 'react'
 import './Keypad.css'
 
 export default function Keypad({ onSubmit }) {
-  const [pin, setPin] = useState('')
+  const [answer, setAnswer] = useState('')
   const [message, setMessage] = useState('')
 
-  const handleDigitClick = (digit) => {
-    if (pin.length < 4) {
-      setPin(pin + digit)
-      setMessage('')
-    }
-  }
-
-  const handleBackspace = () => {
-    setPin(pin.slice(0, -1))
-    setMessage('')
-  }
-
   const handleSubmit = () => {
-    if (pin.length !== 4) {
-      setMessage('PIN must be 4 digits.')
+    if (!answer.trim()) {
+      setMessage('Please enter the master key.')
       return
     }
-    onSubmit(pin)
+    onSubmit(answer)
   }
 
   const handleClear = () => {
-    setPin('')
+    setAnswer('')
     setMessage('')
   }
 
@@ -34,36 +22,23 @@ export default function Keypad({ onSubmit }) {
     <div className="keypad-container">
       <div className="pin-display">
         <input
-          type="password"
-          value={pin}
-          readOnly
+          type="text"
+          value={answer}
+          onChange={(e) => {
+            setAnswer(e.target.value)
+            setMessage('')
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              e.preventDefault()
+              handleSubmit()
+            }
+          }}
           className="pin-input"
-          placeholder="••••"
+          placeholder="Enter master key..."
+          autoComplete="off"
+          autoFocus
         />
-      </div>
-
-      <div className="keypad">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((digit) => (
-          <button
-            key={digit}
-            className="keypad-btn"
-            onClick={() => handleDigitClick(String(digit))}
-          >
-            {digit}
-          </button>
-        ))}
-        <button
-          className="keypad-btn keypad-special"
-          onClick={() => handleDigitClick('0')}
-        >
-          0
-        </button>
-        <button
-          className="keypad-btn keypad-special"
-          onClick={handleBackspace}
-        >
-          ← DEL
-        </button>
       </div>
 
       <div className="keypad-actions">
@@ -72,7 +47,7 @@ export default function Keypad({ onSubmit }) {
           style={{ width: '100%', marginBottom: '10px' }}
           onClick={handleSubmit}
         >
-          SUBMIT PIN
+          SUBMIT MASTER KEY
         </button>
         <button
           className="start-button"

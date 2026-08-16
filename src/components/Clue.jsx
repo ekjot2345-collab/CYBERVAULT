@@ -1,79 +1,88 @@
 import { useState } from 'react'
+import './Clue.css'
 
-function Clue({ clue, clueNumber, totalClues, onCorrect }) {
-  const [answer, setAnswer] = useState('')
+export default function Clue({ clue, onSolved, onWrongAnswer, attemptsLeft }) {
+  const [userAnswer, setUserAnswer] = useState('')
   const [message, setMessage] = useState('')
+  const [solved, setSolved] = useState(false)
 
-  const checkAnswer = () => {
-    const userAnswer = answer.trim().toUpperCase()
-    const correctAnswer = clue.answer.trim().toUpperCase()
+  // Normalize answer for comparison (trim and lowercase)
+  const normalizeAnswer = (answer) => {
+    return answer.trim().toLowerCase()
+  }
 
-    if (!userAnswer) {
-      setMessage('ENTER AN ANSWER')
+  // Handle answer verification for all question types
+  const handleSubmit = (e) => {
+    e.preventDefault()
+
+    if (!userAnswer.trim()) {
+      setMessage('Please enter an answer.')
       return
     }
 
-    if (userAnswer === correctAnswer) {
-      setMessage('✓ ACCESS GRANTED')
-
+    // For HOST_DEFINED answers, accept any non-empty answer
+    if (clue.answer === 'HOST_DEFINED') {
+      setMessage('✓ Correct! Fragment recovered.')
+      setSolved(true)
       setTimeout(() => {
-        onCorrect(clue.digit)
-        setAnswer('')
-        setMessage('')
-      }, 500)
+        onSolved(clue.answer)
+      }, 800)
+      return
+    }
+
+    // Normal answer checking (case-insensitive, trimmed)
+    if (normalizeAnswer(userAnswer) === normalizeAnswer(clue.answer)) {
+      setMessage('✓ Correct! Fragment recovered.')
+      setSolved(true)
+      setTimeout(() => {
+        onSolved(clue.answer)
+      }, 800)
     } else {
-      setMessage('✕ INCORRECT — TRY AGAIN')
-      setAnswer('')
+      onWrongAnswer()
+      const remaining = attemptsLeft - 1
+      if (remaining > 0) {
+        setMessage(`✗ Incorrect. ${remaining} ${remaining === 1 ? 'attempt' : 'attempts'} remaining.`)
+        setUserAnswer('')
+      }
     }
   }
 
   return (
     <div className="clue-card">
-
       <div className="clue-category">
         {clue.category}
       </div>
 
-      <div className="lock-number">
-        CLUE {String(clueNumber).padStart(2, '0')} / {String(totalClues).padStart(2, '0')}
-      </div>
-
       <h3>{clue.question}</h3>
 
-      <p className="clue-question">
-        {clue.hint}
-      </p>
-
-      <input
-        className="clue-input"
-        type="text"
-        value={answer}
-        placeholder="ENTER ANSWER"
-        onChange={(e) => setAnswer(e.target.value)}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') {
-            checkAnswer()
-          }
-        }}
-        autoFocus
-      />
-
-      <button
-        className="start-button clue-submit"
-        onClick={checkAnswer}
-      >
-        SUBMIT
-        <span>→</span>
-      </button>
-
-      {message && (
-        <div className="clue-message">
-          {message}
+      {!solved ? (
+        <div className="input-container">
+          <form onSubmit={handleSubmit} autoComplete="off">
+            <input
+              type="text"
+              className="answer-input"
+              placeholder="Enter your answer..."
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              autoComplete="off"
+              autoFocus
+            />
+            <button type="submit" className="verify-button">
+              VERIFY ANSWER
+            </button>
+          </form>
+        </div>
+      ) : (
+        <div className="clue-success">
+          ✓ Fragment {clue.id} recovered: [{clue.answer}]
         </div>
       )}
 
+      {message && (
+        <p className={`clue-message ${solved ? 'success' : 'error'}`}>
+          {message}
+        </p>
+      )}
     </div>
   )
 }
-
-export default Clue
