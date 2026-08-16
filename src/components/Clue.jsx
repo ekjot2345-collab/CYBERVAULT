@@ -1,108 +1,79 @@
 import { useState } from 'react'
-import './Clue.css'
 
-export default function Clue({ clue, onSolved }) {
-  const [userAnswer, setUserAnswer] = useState('')
+function Clue({ clue, clueNumber, totalClues, onCorrect }) {
+  const [answer, setAnswer] = useState('')
   const [message, setMessage] = useState('')
-  const [solved, setSolved] = useState(false)
 
-  // For host-verified questions
-  const handleHostVerify = () => {
-    setMessage('✓ Host verified! Fragment recovered.')
-    setSolved(true)
-    setTimeout(() => {
-      onSolved(clue.digit)
-    }, 800)
-  }
+  const checkAnswer = () => {
+    const userAnswer = answer.trim().toUpperCase()
+    const correctAnswer = clue.answer.trim().toUpperCase()
 
-  // For input questions
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    if (!userAnswer.trim()) {
-      setMessage('Please enter an answer.')
+    if (!userAnswer) {
+      setMessage('ENTER AN ANSWER')
       return
     }
 
-    // Handle HOST_DEFINED answers (host decides)
-    if (clue.answer === 'HOST_DEFINED') {
-      setMessage('✓ Host will verify! Fragment recovered.')
-      setSolved(true)
-      setTimeout(() => {
-        onSolved(clue.digit)
-      }, 800)
-      return
-    }
+    if (userAnswer === correctAnswer) {
+      setMessage('✓ ACCESS GRANTED')
 
-    // Normal answer checking (case-insensitive)
-    if (userAnswer.toUpperCase() === clue.answer.toUpperCase()) {
-      setMessage('✓ Correct! Fragment recovered.')
-      setSolved(true)
       setTimeout(() => {
-        onSolved(clue.digit)
-      }, 800)
+        onCorrect(clue.digit)
+        setAnswer('')
+        setMessage('')
+      }, 500)
     } else {
-      setMessage('✗ Incorrect. Try again.')
-      setUserAnswer('')
+      setMessage('✕ INCORRECT — TRY AGAIN')
+      setAnswer('')
     }
   }
 
   return (
     <div className="clue-card">
+
       <div className="clue-category">
         {clue.category}
       </div>
 
+      <div className="lock-number">
+        CLUE {String(clueNumber).padStart(2, '0')} / {String(totalClues).padStart(2, '0')}
+      </div>
+
       <h3>{clue.question}</h3>
 
-      <p className="clue-hint">
-        💡 {clue.hint}
+      <p className="clue-question">
+        {clue.hint}
       </p>
 
-      {!solved ? (
-        <>
-          {clue.type === 'host-verified' ? (
-            // HOST-VERIFIED QUESTION
-            <div className="host-verified-section">
-              <p className="host-instruction">
-                Complete this challenge, then press the button below when ready for verification.
-              </p>
-              <button
-                className="start-button"
-                onClick={handleHostVerify}
-                style={{ width: '200px' }}
-              >
-                READY FOR VERIFICATION
-              </button>
-            </div>
-          ) : (
-            // INPUT QUESTION
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                className="clue-input"
-                placeholder="Enter your answer..."
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                autoFocus
-              />
-              <button type="submit" className="start-button" style={{ width: '150px' }}>
-                SUBMIT
-              </button>
-            </form>
-          )}
-        </>
-      ) : (
-        <div className="clue-success">
-          ✓ Fragment {clue.id} recovered: [{clue.digit}]
+      <input
+        className="clue-input"
+        type="text"
+        value={answer}
+        placeholder="ENTER ANSWER"
+        onChange={(e) => setAnswer(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            checkAnswer()
+          }
+        }}
+        autoFocus
+      />
+
+      <button
+        className="start-button clue-submit"
+        onClick={checkAnswer}
+      >
+        SUBMIT
+        <span>→</span>
+      </button>
+
+      {message && (
+        <div className="clue-message">
+          {message}
         </div>
       )}
 
-      {message && (
-        <p className={`clue-message ${solved ? 'success' : 'error'}`}>
-          {message}
-        </p>
-      )}
     </div>
   )
 }
+
+export default Clue

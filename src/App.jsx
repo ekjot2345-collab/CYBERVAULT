@@ -7,7 +7,7 @@ import './App.css'
 
 function App() {
   const [started, setStarted] = useState(false)
-  const [timeLeft, setTimeLeft] = useState(300)
+  const [timeLeft, setTimeLeft] = useState(30)
   const [currentClueIndex, setCurrentClueIndex] = useState(0)
   const [collectedDigits, setCollectedDigits] = useState([])
   const [showKeypad, setShowKeypad] = useState(false)
@@ -286,6 +286,7 @@ function App() {
             <span className="play-icon">▶</span>
             <span className="button-text">BEGIN CRACKING</span>
           </button>
+          
 
           <p className="warning">
             Timer starts when the mission begins.
