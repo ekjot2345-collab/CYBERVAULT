@@ -3,6 +3,7 @@ import Clue from './components/Clue'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
+import {VaultWheel} from './components/VaultDoor'
 
 function App() {
   const [started, setStarted] = useState(false)

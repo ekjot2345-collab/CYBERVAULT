@@ -1,349 +1,295 @@
-export const clues = [
+const clues = [
   // =========================
-  // SET 1 — THE RECRUIT
+  // BOLLYWOOD
   // =========================
+
   {
-    set: 1,
-    id: 1,
-    category: 'STRANGER MISSION',
-    type: 'host-verified',
-    question:
-      'Find someone you do not know and get them to say "CYBER VAULT" within 20 seconds.',
-    hint: 'Confidence is your only tool.',
-    answer: 'VAULT',
+    question: "In Munna Bhai M.B.B.S., what is Munna's real profession before becoming a doctor?",
+    answer: "DON",
   },
   {
-    set: 1,
-    id: 2,
-    category: 'DARE',
-    type: 'host-verified',
-    question:
-      'Make your teammate laugh in 10 seconds without touching them or saying the word "laugh".',
-    hint: 'Your face and acting are your weapons.',
-    answer: 'YES',
+    question: "In Welcome, what is Majnu Bhai famous for creating?",
+    answer: "PAINTINGS",
   },
   {
-    set: 1,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What fruit is commonly associated with keeping the doctor away?',
-    hint: 'Think about a popular health saying.',
-    answer: 'APPLE',
+    question: "In Bhool Bhulaiyaa, what is the name of the spirit everyone fears?",
+    answer: "MANJULIKA",
+  },
+  {
+    question: "In 3 Idiots, what is Rancho's real name?",
+    answer: "PHUNSUKH",
+  },
+  {
+    question: "In Andaz Apna Apna, what is Teja's famous title?",
+    answer: "CRIMEMASTER",
+  },
+  {
+    question: "In Dhamaal, what are the four friends searching for?",
+    answer: "TREASURE",
+  },
+  {
+    question: "In PK, what does the alien search for on Earth?",
+    answer: "GOD",
+  },
+  {
+    question: "In Drishyam, what evidence does Vijay hide to protect his family?",
+    answer: "BODY",
+  },
+  {
+    question: "In Zindagi Na Milegi Dobara, which country do the friends travel through?",
+    answer: "SPAIN",
+  },
+  {
+    question: "In Fukrey, what do the friends use to predict their future?",
+    answer: "DREAMS",
+  },
+  {
+    question: "In Yeh Jawaani Hai Deewani, what is Bunny's dream profession?",
+    answer: "TRAVELER",
+  },
+  {
+    question: "In Barfi!, what condition does Barfi have?",
+    answer: "MUTE",
+  },
+  {
+    question: "In Queen, which country does Rani travel to after her wedding gets cancelled?",
+    answer: "FRANCE",
+  },
+  {
+    question: "In Rockstar, what instrument does Janardhan play?",
+    answer: "GUITAR",
+  },
+  {
+    question: "In Brahmāstra, what is Ranbir Kapoor's character's special power?",
+    answer: "FIRE",
   },
 
   // =========================
-  // SET 2 — THE SOCIAL HACKER
+  // HOLLYWOOD
   // =========================
+
   {
-    set: 2,
-    id: 1,
-    category: 'ACTING',
-    type: 'host-verified',
-    question:
-      'Say "Open the vault!" like you are the villain in a dramatic movie.',
-    hint: 'Overacting is encouraged.',
-    answer: 'OPEN',
+    question: "In Avengers: Endgame, what does Thanos want to collect?",
+    answer: "STONES",
   },
   {
-    set: 2,
-    id: 2,
-    category: 'SILENT COMMUNICATION',
-    type: 'host-verified',
-    question:
-      'Make your teammate guess the word "KEY" without speaking or writing anything.',
-    hint: 'Think beyond words.',
-    answer: 'KEY',
+    question: "In The Matrix, which pill does Neo choose?",
+    answer: "RED",
   },
   {
-    set: 2,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What is the name of our engineering college?',
-    hint: 'Think about where you are studying.',
-    answer: 'THAPAR',
+    question: "In Avatar, what is the name of the blue species?",
+    answer: "NA'VI",
   },
 
   // =========================
-  // SET 3 — THE OBSERVER
+  // SONGS & MUSIC
   // =========================
+
   {
-    set: 3,
-    id: 1,
-    category: 'OBSERVATION',
-    type: 'host-verified',
-    question:
-      'Look at the game host for 5 seconds. Look away. What colour are their shoes?',
-    hint: 'You only get one guess.',
-    answer: 'HOST_DEFINED',
+    question: 'Who sang the famous song "Kesariya"?',
+    answer: "ARijit".toUpperCase(),
   },
   {
-    set: 3,
-    id: 2,
-    category: 'STRAIGHT FACE',
-    type: 'host-verified',
-    question:
-      'Stare at your teammate for 15 seconds without either of you laughing.',
-    hint: 'The first person to laugh loses.',
-    answer: 'PASS',
+    question: 'Which movie has the song "Jai Jai Shivshankar"?',
+    answer: "WAR",
   },
   {
-    set: 3,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What do programmers write to create software?',
-    hint: 'It involves logical instructions for computers.',
-    answer: 'CODE',
+    question: 'In "Naatu Naatu", which movie features this song?',
+    answer: "RRR",
+  },
+  {
+    question: '"Chaiyya Chaiyya" was performed on what?',
+    answer: "TRAIN",
+  },
+  {
+    question: '"Apna Bana Le" belongs to which movie?',
+    answer: "BHEDIYA",
+  },
+  {
+    question: '"Ghungroo" song is from which movie?',
+    answer: "WAR",
+  },
+  {
+    question: 'Which song has the famous line "Aankh Marey"?',
+    answer: "SIMMBA",
+  },
+  {
+    question: '"London Thumakda" belongs to which movie?',
+    answer: "QUEEN",
+  },
+  {
+    question: 'Which place is famous for the step "Lungi Dance"?',
+    answer: "CHENNAI",
+  },
+  {
+    question: 'Which song features the line "Abhi Toh Party Shuru Hui Hai"?',
+    answer: "KHOOBSURAT",
   },
 
   // =========================
-  // SET 4 — THE RISK TAKER
+  // RIDDLES
   // =========================
+
   {
-    set: 4,
-    id: 1,
-    category: 'SAFE OR DARE',
-    type: 'host-verified',
-    question:
-      'Choose SAFE or DARE. If you choose SAFE, lose one attempt. If you choose DARE, complete the challenge given by the host.',
-    hint: 'The vault rewards bravery.',
-    answer: 'DARE',
+    question: "I am a color, but lovers search for me. I became famous with a song from a superhero movie. Who am I?",
+    answer: "KESARIYA",
   },
   {
-    set: 4,
-    id: 2,
-    category: 'COMPLIMENT MISSION',
-    type: 'host-verified',
-    question:
-      'Give a genuine compliment to someone nearby without using "nice", "good", or "cool".',
-    hint: 'Make it believable.',
-    answer: 'PASS',
+    question: "I have keys but open no doors. I have space but no room. Who am I?",
+    answer: "KEYBOARD",
   },
   {
-    set: 4,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What popular programming language is known for its use in web development and has a snake as its mascot?',
-    hint: 'Think about a reptile.',
-    answer: 'PYTHON',
+    question: "I have a face, two hands, but no arms. Who am I?",
+    answer: "CLOCK",
+  },
+  {
+    question: "I have teeth but I never bite. Who am I?",
+    answer: "COMB",
+  },
+  {
+    question: "I get shorter every time I work. What am I?",
+    answer: "PENCIL",
+  },
+  {
+    question: "I am always in front of you but can never be seen. What am I?",
+    answer: "FUTURE",
+  },
+  {
+    question: "I speak without a mouth and hear without ears. What am I?",
+    answer: "ECHO",
+  },
+  {
+    question: "I can be cracked, but I am not an egg. I can be broken, but I am not glass. What am I?",
+    answer: "PASSWORD",
+  },
+  {
+    question: "I have no body, but I have a heartbeat. What am I?",
+    answer: "SERVER",
+  },
+  {
+    question: "I have no legs, but I can make you run faster than anything. What am I?",
+    answer: "DEADLINE",
+  },
+  {
+    question: "I have cities but no houses, forests but no trees, and rivers but no water. What am I?",
+    answer: "MAP",
+  },
+  {
+    question: "I have 13 hearts but no organs. What am I?",
+    answer: "CARDS",
+  },
+  {
+    question: "What can you catch but never throw?",
+    answer: "COLD",
+  },
+  {
+    question: "What has many keys but cannot open a single lock?",
+    answer: "PIANO",
+  },
+  {
+    question: "What has an eye but cannot see, and lives in the middle of a storm?",
+    answer: "HURRICANE",
+  },
+  {
+    question: "What can run but never walks, has a bed but never sleeps?",
+    answer: "RIVER",
+  },
+  {
+    question: "What disappears the moment you say its name?",
+    answer: "SILENCE",
+  },
+  {
+    question: "A man shaves several times a day but still has a beard. Who is he?",
+    answer: "BARBER",
+  },
+  {
+    question: "What five-letter word becomes shorter when you add two letters to it?",
+    answer: "SHORT",
+  },
+  {
+    question: "What has a neck but no head and wears a cap?",
+    answer: "BOTTLE",
+  },
+  {
+    question: "What can be cracked, made, told and played?",
+    answer: "JOKE",
+  },
+  {
+    question: "If you have me, you want to share me. If you share me, you no longer have me. What am I?",
+    answer: "SECRET",
+  },
+  {
+    question: "If you overtake the person in second place, what place are you in?",
+    answer: "SECOND",
   },
 
   // =========================
-  // SET 5 — THE BLUFF
+  // TECH
   // =========================
-  {
-    set: 5,
-    id: 1,
-    category: 'BLUFF',
-    type: 'host-verified',
-    question:
-      'Tell your teammate two true things and one lie about yourself. They get one guess to find the lie.',
-    hint: 'Make the lie believable.',
-    answer: 'LIE',
-  },
-  {
-    set: 5,
-    id: 2,
-    category: 'ROLEPLAY',
-    type: 'host-verified',
-    question:
-      'Pretend you are a security guard who just caught someone trying to break into the vault. Act for 10 seconds.',
-    hint: 'Take the role seriously.',
-    answer: 'GUARD',
-  },
-  {
-    set: 5,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What is the term for software that protects a computer from malicious programs?',
-    hint: 'It acts as a shield against viruses.',
-    answer: 'ANTIVIRUS',
-  },
 
-  // =========================
-  // SET 6 — THE CHAOS SET
-  // =========================
   {
-    set: 6,
-    id: 1,
-    category: 'FORBIDDEN WORD',
-    type: 'host-verified',
-    question:
-      'Talk to your teammate for 15 seconds without saying "yes" or "no".',
-    hint: 'You will have to think before answering.',
-    answer: 'PASS',
+    question: "The brain of a computer?",
+    answer: "CPU",
   },
   {
-    set: 6,
-    id: 2,
-    category: 'MOVIE MODE',
-    type: 'host-verified',
-    question:
-      'Say "I know the password" in the most dramatic way possible.',
-    hint: 'Imagine the final scene of a movie.',
-    answer: 'PASSWORD',
+    question: "The company behind the iPhone?",
+    answer: "APPLE",
   },
   {
-    set: 6,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What technology allows you to browse websites?',
-    hint: 'Think about what application you use to visit webpages.',
-    answer: 'BROWSER',
-  },
-
-  // =========================
-  // SET 7 — THE MIND READER
-  // =========================
-  {
-    set: 7,
-    id: 1,
-    category: 'MIND READER',
-    type: 'host-verified',
-    question:
-      'Your teammate secretly chooses a number from 1 to 5. Guess their number on your first attempt.',
-    hint: 'Think like your teammate.',
-    answer: 'HOST_DEFINED',
+    question: "The company that owns Instagram?",
+    answer: "META",
   },
   {
-    set: 7,
-    id: 2,
-    category: 'NO WORDS',
-    type: 'host-verified',
-    question:
-      'Communicate "I need the key" to your teammate without speaking.',
-    hint: 'Use gestures.',
-    answer: 'KEY',
+    question: "The company behind ChatGPT?",
+    answer: "OPENAI",
   },
   {
-    set: 7,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What is the most popular version control system used by developers?',
-    hint: 'It helps track changes in code and is used with GitHub.',
-    answer: 'GIT',
-  },
-
-  // =========================
-  // SET 8 — THE PERFORMER
-  // =========================
-  {
-    set: 8,
-    id: 1,
-    category: 'TRAILER VOICE',
-    type: 'host-verified',
-    question:
-      'Say "One vault. Four clues. One chance." like a movie trailer narrator.',
-    hint: 'Make it dramatic.',
-    answer: 'PASS',
+    question: "Google's AI chatbot?",
+    answer: "GEMINI",
   },
   {
-    set: 8,
-    id: 2,
-    category: 'MIRROR',
-    type: 'host-verified',
-    question:
-      'Stand opposite your teammate and copy their movements like a mirror for 10 seconds.',
-    hint: 'Do not lead. Follow.',
-    answer: 'MIRROR',
+    question: "A copy of important files?",
+    answer: "BACKUP",
   },
   {
-    set: 8,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What markup language is used to create the structure of web pages?',
-    hint: 'Think about the building blocks of websites.',
-    answer: 'HTML',
-  },
-
-  // =========================
-  // SET 9 — THE FINAL RECRUIT
-  // =========================
-  {
-    set: 9,
-    id: 1,
-    category: 'SOCIAL MISSION',
-    type: 'host-verified',
-    question:
-      'Find someone nearby and ask: "Would you survive the Cyber Vault?" Get their answer.',
-    hint: 'Confidence is key.',
-    answer: 'HOST_DEFINED',
+    question: "The device that distributes Wi-Fi?",
+    answer: "ROUTER",
   },
   {
-    set: 9,
-    id: 2,
-    category: 'IMPERSONATION',
-    type: 'host-verified',
-    question:
-      'Imitate a famous movie character for 5 seconds. Your teammate must guess who you are.',
-    hint: 'Pick someone recognizable.',
-    answer: 'HOST_DEFINED',
+    question: "A computer's temporary memory?",
+    answer: "RAM",
   },
   {
-    set: 9,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What is the name of the popular JavaScript library for building user interfaces, developed by Facebook?',
-    hint: 'Think about what this project is built with.',
-    answer: 'REACT',
-  },
-
-  // =========================
-  // SET 10 — THE VAULT MASTER
-  // =========================
-  {
-    set: 10,
-    id: 1,
-    category: 'SILENT TEAMWORK',
-    type: 'host-verified',
-    question:
-      'Choose a number from 1 to 5 without speaking. Both teammates must choose the same number.',
-    hint: 'You have to think alike.',
-    answer: 'HOST_DEFINED',
+    question: "Apple's mobile operating system?",
+    answer: "IOS",
   },
   {
-    set: 10,
-    id: 2,
-    category: 'MAKE THE HOST LAUGH',
-    type: 'host-verified',
-    question:
-      'You have 15 seconds to make the game host laugh without touching them.',
-    hint: 'Anything goes — within reason.',
-    answer: 'LAUGH',
+    question: "Microsoft's operating system?",
+    answer: "WINDOWS",
   },
   {
-    set: 10,
-    id: 3,
-    category: 'TECH',
-    type: 'input',
-    question:
-      'What popular NoSQL database is known for storing data in JSON-like documents?',
-    hint: 'It sounds like a type of database that is humongous.',
-    answer: 'MONGODB',
+    question: "The key commonly used to refresh a webpage?",
+    answer: "F5",
   },
-  
+  {
+    question: "The language commonly used to style websites?",
+    answer: "CSS",
+  },
+  {
+    question: "The language used to structure webpages?",
+    answer: "HTML",
+  },
+  {
+    question: "The technology behind contactless payments?",
+    answer: "NFC",
+  },
 ];
-export const getRandomClueSet = () => {
-  const sets = [...new Set(clues.map(clue => clue.set))];
 
-  const randomSet = sets[Math.floor(Math.random() * sets.length)];
 
-  return clues.filter(clue => clue.set === randomSet);
-};
+// Get a random set of 3 clues
+export function getRandomClueSet() {
+  const shuffled = [...clues].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, 3);
+}
+
+export default clues;
