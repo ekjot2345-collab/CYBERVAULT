@@ -1,21 +1,17 @@
 import { useState } from 'react'
 import './Clue.css'
 
-export default function Clue({ clue, onSolved }) {
+export default function Clue({ clue, onSolved, onWrongAnswer, attemptsLeft }) {
   const [userAnswer, setUserAnswer] = useState('')
   const [message, setMessage] = useState('')
   const [solved, setSolved] = useState(false)
 
-  // For host-verified questions
-  const handleHostVerify = () => {
-    setMessage('✓ Host verified! Fragment recovered.')
-    setSolved(true)
-    setTimeout(() => {
-      onSolved(clue.digit)
-    }, 800)
+  // Normalize answer for comparison (trim and lowercase)
+  const normalizeAnswer = (answer) => {
+    return answer.trim().toLowerCase()
   }
 
-  // For input questions
+  // Handle answer verification for all question types
   const handleSubmit = (e) => {
     e.preventDefault()
 
@@ -24,26 +20,30 @@ export default function Clue({ clue, onSolved }) {
       return
     }
 
-    // Handle HOST_DEFINED answers (host decides)
+    // For HOST_DEFINED answers, accept any non-empty answer
     if (clue.answer === 'HOST_DEFINED') {
-      setMessage('✓ Host will verify! Fragment recovered.')
+      setMessage('✓ Correct! Fragment recovered.')
       setSolved(true)
       setTimeout(() => {
-        onSolved(clue.digit)
+        onSolved(clue.answer)
       }, 800)
       return
     }
 
-    // Normal answer checking (case-insensitive)
-    if (userAnswer.toUpperCase() === clue.answer.toUpperCase()) {
+    // Normal answer checking (case-insensitive, trimmed)
+    if (normalizeAnswer(userAnswer) === normalizeAnswer(clue.answer)) {
       setMessage('✓ Correct! Fragment recovered.')
       setSolved(true)
       setTimeout(() => {
-        onSolved(clue.digit)
+        onSolved(clue.answer)
       }, 800)
     } else {
-      setMessage('✗ Incorrect. Try again.')
-      setUserAnswer('')
+      onWrongAnswer()
+      const remaining = attemptsLeft - 1
+      if (remaining > 0) {
+        setMessage(`✗ Incorrect. ${remaining} ${remaining === 1 ? 'attempt' : 'attempts'} remaining.`)
+        setUserAnswer('')
+      }
     }
   }
 
@@ -55,46 +55,26 @@ export default function Clue({ clue, onSolved }) {
 
       <h3>{clue.question}</h3>
 
-      <p className="clue-hint">
-        💡 {clue.hint}
-      </p>
-
       {!solved ? (
-        <>
-          {clue.type === 'host-verified' ? (
-            // HOST-VERIFIED QUESTION
-            <div className="host-verified-section">
-              <p className="host-instruction">
-                Complete this challenge, then press the button below when ready for verification.
-              </p>
-              <button
-                className="start-button"
-                onClick={handleHostVerify}
-                style={{ width: '200px' }}
-              >
-                READY FOR VERIFICATION
-              </button>
-            </div>
-          ) : (
-            // INPUT QUESTION
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                className="clue-input"
-                placeholder="Enter your answer..."
-                value={userAnswer}
-                onChange={(e) => setUserAnswer(e.target.value)}
-                autoFocus
-              />
-              <button type="submit" className="start-button" style={{ width: '150px' }}>
-                SUBMIT
-              </button>
-            </form>
-          )}
-        </>
+        <div className="input-container">
+          <form onSubmit={handleSubmit} autoComplete="off">
+            <input
+              type="text"
+              className="answer-input"
+              placeholder="Enter your answer..."
+              value={userAnswer}
+              onChange={(e) => setUserAnswer(e.target.value)}
+              autoComplete="off"
+              autoFocus
+            />
+            <button type="submit" className="verify-button">
+              VERIFY ANSWER
+            </button>
+          </form>
+        </div>
       ) : (
         <div className="clue-success">
-          ✓ Fragment {clue.id} recovered: [{clue.digit}]
+          ✓ Fragment {clue.id} recovered: [{clue.answer}]
         </div>
       )}
 

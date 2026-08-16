@@ -9,12 +9,15 @@
 }
 
 .pin-input {
-  width: 200px;
+  width: 100%;
+  max-width: 400px;
   height: 60px;
 
-  text-align: center;
-  font-size: 32px;
-  letter-spacing: 15px;
+  padding: 0 20px;
+
+  text-align: left;
+  font-size: 18px;
+  letter-spacing: 1px;
 
   background: #0a101b;
   border: 2px solid #a3ff12;
@@ -24,6 +27,12 @@
   font-weight: 700;
 
   outline: none;
+  
+  cursor: text;
+}
+
+.pin-input:focus {
+  box-shadow: 0 0 15px rgba(163, 255, 18, 0.3);
 }
 
 .pin-input::placeholder {
