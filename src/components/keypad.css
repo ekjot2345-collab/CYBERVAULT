@@ -1,0 +1,91 @@
+.keypad-container {
+  max-width: 400px;
+  margin: 30px 0;
+}
+
+.pin-display {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.pin-input {
+  width: 200px;
+  height: 60px;
+
+  text-align: center;
+  font-size: 32px;
+  letter-spacing: 15px;
+
+  background: #0a101b;
+  border: 2px solid #a3ff12;
+  color: #a3ff12;
+
+  font-family: monospace;
+  font-weight: 700;
+
+  outline: none;
+}
+
+.pin-input::placeholder {
+  color: #a3ff12;
+  opacity: 0.5;
+}
+
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.keypad-btn {
+  height: 50px;
+
+  background: #0d1520;
+  border: 1px solid #334052;
+  color: #f1f4f7;
+
+  font-family: monospace;
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.keypad-btn:hover {
+  background: #1a2535;
+  border-color: #a3ff12;
+  box-shadow: 0 0 10px rgba(163, 255, 18, 0.1);
+}
+
+.keypad-btn:active {
+  transform: translateY(1px);
+}
+
+.keypad-btn.keypad-special {
+  grid-column: span 1;
+  background: #1a2535;
+  border-color: #a3ff12;
+  color: #a3ff12;
+  font-size: 12px;
+}
+
+.keypad-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.keypad-message {
+  margin-top: 15px;
+  text-align: center;
+  color: #ff6b6b;
+  font-family: monospace;
+  font-size: 12px;
+}
