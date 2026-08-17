@@ -4,7 +4,7 @@ import Clue from './components/Clue'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
-import GridScan from './GridScan';
+import GridScan from "./components/Gridscan";
 
 function App() {
   const [started, setStarted] = useState(false)
