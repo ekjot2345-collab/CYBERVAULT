@@ -288,60 +288,6 @@ function App() {
           </div>
         </section>
       </main>
-
-      <footer className="footer">
-        <section className="hacker-section">
-          <div className="code-stream code-stream-left">
-            <div className="code-line">[SYSTEM] INITIALIZING SECURE CHANNEL...</div>
-            <div className="code-line">[AUTH] BYPASS_PROTOCOL --ACTIVE</div>
-            <div className="code-line">[NODE] CONNECTION ESTABLISHED @ 127.0.0.1:8443</div>
-            <div className="code-line">[SCAN] SEARCHING ENCRYPTED FRAGMENTS...</div>
-            <div className="code-line">[VAULT] FIREWALL DETECTED - LAYER_7</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_01 █████░░░░░</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_02 ███████░░░░</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_03 ██████████░</div>
-            <div className="code-line">[WARN] INTRUSION DETECTED - EVASION MODE</div>
-            <div className="code-line">[TRACE] CONNECTION MASKED - GHOST_PROTOCOL</div>
-            <div className="code-line">[ACCESS] AUTHENTICATION REQUIRED</div>
-            <div className="code-line">[SYSTEM] INITIALIZING SECURE CHANNEL...</div>
-            <div className="code-line">[AUTH] BYPASS_PROTOCOL --ACTIVE</div>
-            <div className="code-line">[NODE] CONNECTION ESTABLISHED @ 127.0.0.1:8443</div>
-            <div className="code-line">[SCAN] SEARCHING ENCRYPTED FRAGMENTS...</div>
-            <div className="code-line">[VAULT] FIREWALL DETECTED - LAYER_7</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_01 █████░░░░░</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_02 ███████░░░░</div>
-            <div className="code-line">[CRYPT] DECRYPTING FRAGMENT_03 ██████████░</div>
-            <div className="code-line">[WARN] INTRUSION DETECTED - EVASION MODE</div>
-            <div className="code-line">[TRACE] CONNECTION MASKED - GHOST_PROTOCOL</div>
-            <div className="code-line">[ACCESS] AUTHENTICATION REQUIRED</div>
-          </div>
-
-          <div className="code-stream code-stream-right">
-            <div className="code-line">[FIREWALL] PACKET_INSPECTION_ACTIVE</div>
-            <div className="code-line">[PROTOCOL] TLS_1.3 HANDSHAKE INITIATED</div>
-            <div className="code-line">[SOCKET] PORT 8443 LISTENING</div>
-            <div className="code-line">[ENCRYPT] RSA_4096 KEY_PAIR GENERATED</div>
-            <div className="code-line">[HASH] SHA256 CHECKSUM VERIFIED</div>
-            <div className="code-line">[RELAY] ROUTING THROUGH PROXY_NODES</div>
-            <div className="code-line">[QUARANTINE] SUSPICIOUS_PACKET FLAGGED</div>
-            <div className="code-line">[MONITOR] ANOMALY_DETECTION THRESHOLD 85%</div>
-            <div className="code-line">[BACKUP] VAULT_STATE ENCRYPTED & ARCHIVED</div>
-            <div className="code-line">[ALERT] MULTIPLE LOGIN ATTEMPTS BLOCKED</div>
-            <div className="code-line">[SEGMENT] NETWORK ISOLATION ACTIVE</div>
-            <div className="code-line">[FIREWALL] PACKET_INSPECTION_ACTIVE</div>
-            <div className="code-line">[PROTOCOL] TLS_1.3 HANDSHAKE INITIATED</div>
-            <div className="code-line">[SOCKET] PORT 8443 LISTENING</div>
-            <div className="code-line">[ENCRYPT] RSA_4096 KEY_PAIR GENERATED</div>
-            <div className="code-line">[HASH] SHA256 CHECKSUM VERIFIED</div>
-            <div className="code-line">[RELAY] ROUTING THROUGH PROXY_NODES</div>
-            <div className="code-line">[QUARANTINE] SUSPICIOUS_PACKET FLAGGED</div>
-            <div className="code-line">[MONITOR] ANOMALY_DETECTION THRESHOLD 85%</div>
-            <div className="code-line">[BACKUP] VAULT_STATE ENCRYPTED & ARCHIVED</div>
-            <div className="code-line">[ALERT] MULTIPLE LOGIN ATTEMPTS BLOCKED</div>
-            <div className="code-line">[SEGMENT] NETWORK ISOLATION ACTIVE</div>
-          </div>
-        </section>
-      </footer>
     </div>
   )
 }
