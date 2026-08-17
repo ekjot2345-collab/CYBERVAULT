@@ -283,8 +283,7 @@ function App() {
           </div>
 
           <div className="vault-meta">
-            <span>VAULT // 001</span>
-            <span>AUTHORIZATION REQUIRED</span>
+          
           </div>
         </section>
       </main>

@@ -8,8 +8,7 @@
       rgba(8, 13, 23, 0.97) 0%,
       rgba(8, 13, 23, 0.88) 45%,
       rgba(8, 13, 23, 0.78) 100%
-    ),
-    url('D:\game\public\Screenshot 2026-08-16 025307.png');
+    );
 
   background-size: cover;
   background-position: center;
