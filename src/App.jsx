@@ -1,9 +1,9 @@
+import VaultWheel from "./components/VaultDoor";
 import { useEffect, useState, useCallback } from 'react'
 import Clue from './components/Clue'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
-import {VaultWheel} from './components/VaultDoor'
 
 function App() {
   const [started, setStarted] = useState(false)
@@ -262,17 +262,17 @@ function App() {
                 </div>
 
                 <div className="vault-lock">
-                  <div className="lock-wheel">
-                    <div className="wheel-handle handle-top"></div>
-                    <div className="wheel-handle handle-right"></div>
-                    <div className="wheel-handle handle-bottom"></div>
-                    <div className="wheel-handle handle-left"></div>
+  <VaultWheel>
+    <div className="wheel-handle handle-top"></div>
+    <div className="wheel-handle handle-right"></div>
+    <div className="wheel-handle handle-bottom"></div>
+    <div className="wheel-handle handle-left"></div>
 
-                    <div className="wheel-ring">
-                      <div className="lock-center">🔒</div>
-                    </div>
-                  </div>
-                </div>
+    <div className="wheel-ring">
+      <div className="lock-center">🔒</div>
+    </div>
+  </VaultWheel>
+</div>
 
                 <div className="door-status">
                   <span className="status-dot"></span>
