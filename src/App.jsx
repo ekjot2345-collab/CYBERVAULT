@@ -4,6 +4,7 @@ import Clue from './components/Clue'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
+import GridScan from './GridScan';
 
 function App() {
   const [started, setStarted] = useState(false)
@@ -130,6 +131,27 @@ function App() {
 
     // Show clue screen
     return (
+      <>
+      <div style={{ width: '100%', height: '600px', position: 'relative' }}>
+        <GridScan
+          sensitivity={0.55}
+          lineThickness={1}
+          linesColor="#2F293A"
+          gridScale={0.1}
+          scanColor="#FF9FFC"
+          scanOpacity={0.4}
+          enablePost
+          bloomIntensity={0.6}
+          chromaticAberration={0.002}
+          noiseIntensity={0.01}
+          lineJitter={0.1}
+          scanGlow={0.5}
+          scanSoftness={2}
+          enableWebcam={false}
+          showPreview={false}
+        />
+      </div>
+
       <div className="game-screen">
         <header className="navbar">
           <div className="logo">
@@ -173,6 +195,7 @@ function App() {
           </div>
         </main>
       </div>
+      </>
     )
   }
 
@@ -290,5 +313,4 @@ function App() {
     </div>
   )
 }
-
 export default App
