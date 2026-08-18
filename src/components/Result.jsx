@@ -1,7 +1,8 @@
 import './Result.css'
 
-export default function Result({ result, correctAnswer, userAnswer, onReset, attemptsUsed }) {
+export default function Result({ result, onReset, attemptsUsed = 3 }) {
   const isSuccess = result === 'success'
+  const attemptsDepleted = attemptsUsed >= 3
 
   return (
     <div className={`result-screen ${result}`}>
@@ -16,15 +17,17 @@ export default function Result({ result, correctAnswer, userAnswer, onReset, att
 
         <p className="result-status">
           {isSuccess
-            ? 'Congratulations! You cracked the vault and escaped!'
-            : 'You have used all 3 attempts. The vault remains locked.'}
+            ? 'Congratulations! You cracked all security locks and breached the cyber vault!'
+            : attemptsDepleted
+              ? 'Security lockdown triggered! You have used all 3 attempts.'
+              : 'Security alarm triggered! Time expired before the vault could be unlocked.'}
         </p>
 
         {!isSuccess && (
           <div className="result-details">
             <div className="detail-box">
               <span>ATTEMPTS USED</span>
-              <strong>3 / 3</strong>
+              <strong>{attemptsUsed} / 3</strong>
             </div>
           </div>
         )}
