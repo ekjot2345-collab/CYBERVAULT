@@ -1,4 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
 @import "tailwindcss";
+
+:root {
+  --font-size: 16px;
+  --background: #17171f;
+  --foreground: #dddad3;
+  --card: #1d1d27;
+  --card-foreground: #dddad3;
+  --popover: #1d1d27;
+  --popover-foreground: #dddad3;
+  --primary: #b89558;
+  --primary-foreground: #16120a;
+  --secondary: #242430;
+  --secondary-foreground: #c4c0b8;
+  --muted: #20202c;
+  --muted-foreground: #6a6878;
+  --accent: #b89558;
+  --accent-foreground: #16120a;
+  --destructive: #c44040;
+  --destructive-foreground: #fde8e8;
+  --border: rgba(255, 255, 255, 0.07);
+  --input: transparent;
+  --input-background: #20202c;
+  --switch-background: #3a3a4a;
+  --ring: #b89558;
+  --radius: 0.15rem;
+}
 
 * {
   box-sizing: border-box;
@@ -10,8 +37,52 @@ body,
   margin: 0;
   min-height: 100%;
   width: 100%;
+  background-color: #17171f;
+  color: #dddad3;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-body {
-  background: #080d17;
+@keyframes shineMove {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+.card-spotlight {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  --spot-color: rgba(184, 149, 88, 0.12);
+  background-color: #1d1d27;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.card-spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    550px circle at var(--mouse-x) var(--mouse-y),
+    var(--spot-color),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.card-spotlight:hover::before {
+  opacity: 1;
+}
+
+.card-spotlight > * {
+  position: relative;
+  z-index: 1;
+}
+
+.blur-word {
+  display: inline-block;
 }
