@@ -4,14 +4,12 @@ import Clue from './components/Clue'
 import Result from './components/Result'
 import { getRandomClueSet } from './data/clues'
 import './App.css'
-import GridScan from "./components/Gridscan";
 
 function App() {
   const [started, setStarted] = useState(false)
   const [timeLeft, setTimeLeft] = useState(30)
   const [currentClueIndex, setCurrentClueIndex] = useState(0)
   const [collectedAnswers, setCollectedAnswers] = useState([])
-  const [userAnswer, setUserAnswer] = useState('')
   const [result, setResult] = useState(null)
   const [clues, setClues] = useState([])
   const [setNumber, setSetNumber] = useState(0)
@@ -22,14 +20,13 @@ function App() {
     setTimeLeft(30)
     setCurrentClueIndex(0)
     setCollectedAnswers([])
-    setUserAnswer('')
     setResult(null)
     setAttemptsLeft(3)
   }
 
   const loadNewSet = useCallback(() => {
     const randomClues = getRandomClueSet()
-    const setNum = randomClues[0].set
+    const setNum = randomClues[0]?.set || 1
     setClues(randomClues)
     setSetNumber(setNum)
     resetGameState()
@@ -44,11 +41,11 @@ function App() {
 
   // Timer logic
   useEffect(() => {
-    if (!started || timeLeft <= 0 || result) return
+    if (!started || result) return
 
     const timer = setInterval(() => {
       setTimeLeft((time) => {
-        if (time - 1 <= 0) {
+        if (time <= 1) {
           setResult('failure')
           return 0
         }
@@ -57,7 +54,7 @@ function App() {
     }, 1000)
 
     return () => clearInterval(timer)
-  }, [started, timeLeft, result])
+  }, [started, result])
 
   const minutes = Math.floor(timeLeft / 60)
   const seconds = timeLeft % 60
@@ -69,7 +66,7 @@ function App() {
     setCollectedAnswers(newAnswers)
 
     if (newAnswers.length < clues.length) {
-      setCurrentClueIndex(currentClueIndex + 1)
+      setCurrentClueIndex((prevIndex) => prevIndex + 1)
     } else {
       // All questions answered correctly - SUCCESS!
       setResult('success')
@@ -119,8 +116,6 @@ function App() {
           <main className="game-content">
             <Result 
               result={result} 
-              correctAnswer={collectedAnswers.join('')}
-              userAnswer={userAnswer}
               onReset={resetGame}
               attemptsUsed={3 - attemptsLeft}
             />
@@ -131,27 +126,6 @@ function App() {
 
     // Show clue screen
     return (
-      <>
-      <div style={{ width: '100%', height: '600px', position: 'relative' }}>
-        <GridScan
-          sensitivity={0.55}
-          lineThickness={1}
-          linesColor="#2F293A"
-          gridScale={0.1}
-          scanColor="#FF9FFC"
-          scanOpacity={0.4}
-          enablePost
-          bloomIntensity={0.6}
-          chromaticAberration={0.002}
-          noiseIntensity={0.01}
-          lineJitter={0.1}
-          scanGlow={0.5}
-          scanSoftness={2}
-          enableWebcam={false}
-          showPreview={false}
-        />
-      </div>
-
       <div className="game-screen">
         <header className="navbar">
           <div className="logo">
@@ -186,7 +160,7 @@ function App() {
             </div>
 
             <Clue
-              key={clues[currentClueIndex].id}
+              key={clues[currentClueIndex]?.id || currentClueIndex}
               clue={clues[currentClueIndex]}
               onSolved={handleClueSolved}
               onWrongAnswer={handleWrongAnswer}
@@ -195,7 +169,6 @@ function App() {
           </div>
         </main>
       </div>
-      </>
     )
   }
 
@@ -248,7 +221,7 @@ function App() {
 
             <div className="info-box">
               <span>TIME LIMIT</span>
-              <strong>5 MIN</strong>
+              <strong>30 SEC</strong>
             </div>
           </div>
 
@@ -262,7 +235,6 @@ function App() {
             <span className="play-icon">▶</span>
             <span className="button-text">BEGIN CRACKING</span>
           </button>
-          
         </section>
 
         <section className="vault-section">
@@ -285,17 +257,17 @@ function App() {
                 </div>
 
                 <div className="vault-lock">
-  <VaultWheel>
-    <div className="wheel-handle handle-top"></div>
-    <div className="wheel-handle handle-right"></div>
-    <div className="wheel-handle handle-bottom"></div>
-    <div className="wheel-handle handle-left"></div>
+                  <VaultWheel>
+                    <div className="wheel-handle handle-top"></div>
+                    <div className="wheel-handle handle-right"></div>
+                    <div className="wheel-handle handle-bottom"></div>
+                    <div className="wheel-handle handle-left"></div>
 
-    <div className="wheel-ring">
-      <div className="lock-center">🔒</div>
-    </div>
-  </VaultWheel>
-</div>
+                    <div className="wheel-ring">
+                      <div className="lock-center">🔒</div>
+                    </div>
+                  </VaultWheel>
+                </div>
 
                 <div className="door-status">
                   <span className="status-dot"></span>
@@ -305,12 +277,11 @@ function App() {
             </div>
           </div>
 
-          <div className="vault-meta">
-          
-          </div>
+          <div className="vault-meta"></div>
         </section>
       </main>
     </div>
   )
 }
+
 export default App
